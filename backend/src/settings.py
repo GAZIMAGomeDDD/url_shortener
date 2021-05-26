@@ -68,27 +68,17 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'src.wsgi.application'
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'postgres',
-#         'USER': 'postgres',
-#         'PASSWORD': 'postgres',
-#         'HOST': 'db',
-#         'PORT': 5432,
-#     }
-# }
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'shortlink',
-        'USER': 'mypostgres',
+        'NAME': 'postgres',
+        'USER': 'postgres',
         'PASSWORD': 'postgres',
-        'HOST': 'localhost',
+        'HOST': 'db',
         'PORT': 5432,
     }
 }
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {
