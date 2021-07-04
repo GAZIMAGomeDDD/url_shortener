@@ -1,12 +1,13 @@
 from django.db import IntegrityError
 from django.db.models import Q
-from hashids import Hashids
 from rest_framework.generics import CreateAPIView, RetrieveAPIView
 from rest_framework.response import Response
 from .models import ShortLink, CustomShortLink, URL
 from .serializers import ShortLinkSerializer, CustomShortLinkSerializer, GetURLSerializer
 from rest_framework import status
 from urllib import request
+from string import ascii_uppercase, ascii_lowercase, digits
+from random import sample
 
 
 def valid_url(url):
@@ -36,9 +37,9 @@ class CreateShortLinkView(CreateAPIView):
             try:
                 short_link_object = ShortLink.objects.create(
                     url=url_object,
-                    short_link=Hashids(
-                        salt=url
-                    ).encode(1, 2, 3)
+                    short_link=''.join(
+                        sample(ascii_uppercase + ascii_lowercase + digits, 10)
+                    )
                 )
 
             except IntegrityError:
@@ -61,9 +62,9 @@ class CreateShortLinkView(CreateAPIView):
             url_object = URL.objects.create(url=url)
             short_link_object = ShortLink.objects.create(
                 url=url_object,
-                short_link=Hashids(
-                    salt=url
-                ).encode(1, 2, 3)
+                short_link=''.join(
+                    sample(ascii_uppercase + ascii_lowercase + digits, 10)
+                )
             )
 
             return Response(
